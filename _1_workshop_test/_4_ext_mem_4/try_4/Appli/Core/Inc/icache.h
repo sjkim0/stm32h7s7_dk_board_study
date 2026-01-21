@@ -1,9 +1,9 @@
 /* USER CODE BEGIN Header */
 /**
   ******************************************************************************
-  * @file    xspi.h
+  * @file    icache.h
   * @brief   This file contains all the function prototypes for
-  *          the xspi.c file
+  *          the icache.c file
   ******************************************************************************
   * @attention
   *
@@ -18,8 +18,8 @@
   */
 /* USER CODE END Header */
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __XSPI_H__
-#define __XSPI_H__
+#ifndef __ICACHE_H__
+#define __ICACHE_H__
 
 #ifdef __cplusplus
 extern "C" {
@@ -32,16 +32,11 @@ extern "C" {
 
 /* USER CODE END Includes */
 
-extern XSPI_HandleTypeDef hxspi1;
-
-extern XSPI_HandleTypeDef hxspi2;
-
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */
 
-void MX_XSPI1_Init(void);
-void MX_XSPI2_Init(void);
+void MX_ICACHE_GPU2D_Init(void);
 
 /* USER CODE BEGIN Prototypes */
 
@@ -51,5 +46,5 @@ void MX_XSPI2_Init(void);
 }
 #endif
 
-#endif /* __XSPI_H__ */
+#endif /* __ICACHE_H__ */
 

@@ -1,9 +1,9 @@
 /* USER CODE BEGIN Header */
 /**
   ******************************************************************************
-  * @file    xspi.h
-  * @brief   This file contains all the function prototypes for
-  *          the xspi.c file
+  * @file    icache.c
+  * @brief   This file provides code for the configuration
+  *          of the ICACHE instances.
   ******************************************************************************
   * @attention
   *
@@ -17,39 +17,37 @@
   ******************************************************************************
   */
 /* USER CODE END Header */
-/* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __XSPI_H__
-#define __XSPI_H__
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 /* Includes ------------------------------------------------------------------*/
-#include "main.h"
+#include "icache.h"
 
-/* USER CODE BEGIN Includes */
+/* USER CODE BEGIN 0 */
 
-/* USER CODE END Includes */
+/* USER CODE END 0 */
 
-extern XSPI_HandleTypeDef hxspi1;
+/* ICACHE_GPU2D init function */
+void MX_ICACHE_GPU2D_Init(void)
+{
 
-extern XSPI_HandleTypeDef hxspi2;
+  /* USER CODE BEGIN ICACHE_GPU2D_Init 0 */
 
-/* USER CODE BEGIN Private defines */
+  /* USER CODE END ICACHE_GPU2D_Init 0 */
 
-/* USER CODE END Private defines */
+  /* USER CODE BEGIN ICACHE_GPU2D_Init 1 */
 
-void MX_XSPI1_Init(void);
-void MX_XSPI2_Init(void);
+  /* USER CODE END ICACHE_GPU2D_Init 1 */
 
-/* USER CODE BEGIN Prototypes */
+  /** Enable instruction cache (default 2-ways set associative cache)
+  */
+  if (HAL_ICACHE_Enable() != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN ICACHE_GPU2D_Init 2 */
 
-/* USER CODE END Prototypes */
+  /* USER CODE END ICACHE_GPU2D_Init 2 */
 
-#ifdef __cplusplus
 }
-#endif
 
-#endif /* __XSPI_H__ */
+/* USER CODE BEGIN 1 */
 
+/* USER CODE END 1 */

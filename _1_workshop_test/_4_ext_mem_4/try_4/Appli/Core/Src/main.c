@@ -21,6 +21,7 @@
 #include "crc.h"
 #include "dma2d.h"
 #include "gpu2d.h"
+#include "icache.h"
 #include "jpeg.h"
 #include "ltdc.h"
 #include "gpio.h"
@@ -40,6 +41,8 @@
 /* USER CODE BEGIN PD */
 #define DEF_BUFF_COLUMN_LENGTH (32)
 #define DEF_BUFF_ROW_LENGTH (8)
+
+#define DEF_PSRAM_BUFFER_0 (1024)
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -62,7 +65,11 @@ static uint32_t millis(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 
-__attribute__((section("noncacheable_buffer"))) uint32_t buffer[DEF_BUFF_ROW_LENGTH][DEF_BUFF_COLUMN_LENGTH] = {0, };
+__attribute__((section("noncacheable_buffer")))
+uint32_t buffer[DEF_BUFF_ROW_LENGTH][DEF_BUFF_COLUMN_LENGTH] = {0, };
+
+__attribute__((section("psram_buffer")))
+uint32_t buff_psram[DEF_PSRAM_BUFFER_0] = {0, };
 
 /* USER CODE END 0 */
 
@@ -76,6 +83,14 @@ int main(void)
   /* USER CODE BEGIN 1 */
 
   /* USER CODE END 1 */
+
+  /* Enable the CPU Cache */
+
+  /* Enable I-Cache---------------------------------------------------------*/
+  SCB_EnableICache();
+
+  /* Enable D-Cache---------------------------------------------------------*/
+  SCB_EnableDCache();
 
   /* MCU Configuration--------------------------------------------------------*/
 
@@ -95,11 +110,12 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
-//  MX_CRC_Init();
-//  MX_LTDC_Init();
-//  MX_DMA2D_Init();
-//  MX_GPU2D_Init();
-//  MX_JPEG_Init();
+  MX_CRC_Init();
+  MX_LTDC_Init();
+  MX_DMA2D_Init();
+  MX_GPU2D_Init();
+  MX_JPEG_Init();
+  MX_ICACHE_GPU2D_Init();
   /* USER CODE BEGIN 2 */
 
   apInit();
@@ -114,9 +130,9 @@ int main(void)
 
     /* USER CODE BEGIN 3 */
 	  apLoop();
-	  for(int i = 0; i < DEF_BUFF_COLUMN_LENGTH; i++)
+	  for(int i = 0; i < DEF_BUFF_ROW_LENGTH; i++)
 	  {
-		  for(int j = 0; j < DEF_BUFF_ROW_LENGTH; j++)
+		  for(int j = 0; j < DEF_BUFF_COLUMN_LENGTH; j++)
 		  {
 			  buffer[i][j] = i * j;
 		  }

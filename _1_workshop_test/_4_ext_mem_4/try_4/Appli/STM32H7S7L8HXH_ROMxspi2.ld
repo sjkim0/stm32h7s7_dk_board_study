@@ -61,6 +61,8 @@ MEMORY
   BKPSRAM   (rw)  : ORIGIN = 0x38800000,  LENGTH = 0x00001000
 
   FLASH     (xrw) : ORIGIN = __FLASH_BEGIN, LENGTH = __FLASH_SIZE
+  
+  PSRAM		(xrw) : ORIGIN = 0x70000000, LENGTH = 0x02000000
 }
 
 /* Sections */
@@ -184,6 +186,13 @@ SECTIONS
     KEEP(*(noncacheable_buffer))
     __NONCACHEABLEBUFFER_END = .;  /* create symbol for start of section */
   } > RAM_NONCACHEABLEBUFFER
+
+  PSRAM_REGION (NOLOAD):
+  {
+    __NONCACHEABLEBUFFER_BEGIN = .;/* create symbol for start of section */
+    KEEP(*(psram_buffer))
+    __NONCACHEABLEBUFFER_END = .;  /* create symbol for start of section */
+  } > PSRAM
 
   /* User_heap_stack section, used to check that there is enough "RAM" Ram  type memory left */
   ._user_heap_stack :

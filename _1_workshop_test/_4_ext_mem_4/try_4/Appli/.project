@@ -95,6 +95,11 @@
 			<locationURI>PARENT-1-PROJECT_LOC/Drivers/STM32H7RSxx_HAL_Driver/Src/stm32h7rsxx_hal_gpu2d.c</locationURI>
 		</link>
 		<link>
+			<name>Drivers/STM32H7RSxx_HAL_Driver/stm32h7rsxx_hal_icache.c</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/Drivers/STM32H7RSxx_HAL_Driver/Src/stm32h7rsxx_hal_icache.c</locationURI>
+		</link>
+		<link>
 			<name>Drivers/STM32H7RSxx_HAL_Driver/stm32h7rsxx_hal_jpeg.c</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/Drivers/STM32H7RSxx_HAL_Driver/Src/stm32h7rsxx_hal_jpeg.c</locationURI>
