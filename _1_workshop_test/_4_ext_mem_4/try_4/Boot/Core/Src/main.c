@@ -147,8 +147,8 @@ void SystemClock_Config(void)
   RCC_OscInitStruct.HSEState = RCC_HSE_BYPASS_DIGITAL;
   RCC_OscInitStruct.PLL1.PLLState = RCC_PLL_ON;
   RCC_OscInitStruct.PLL1.PLLSource = RCC_PLLSOURCE_HSE;
-  RCC_OscInitStruct.PLL1.PLLM = 2;
-  RCC_OscInitStruct.PLL1.PLLN = 50;
+  RCC_OscInitStruct.PLL1.PLLM = 4;
+  RCC_OscInitStruct.PLL1.PLLN = 100;
   RCC_OscInitStruct.PLL1.PLLP = 1;
   RCC_OscInitStruct.PLL1.PLLQ = 2;
   RCC_OscInitStruct.PLL1.PLLR = 2;
@@ -165,7 +165,17 @@ void SystemClock_Config(void)
   RCC_OscInitStruct.PLL2.PLLS = 2;
   RCC_OscInitStruct.PLL2.PLLT = 2;
   RCC_OscInitStruct.PLL2.PLLFractional = 0;
-  RCC_OscInitStruct.PLL3.PLLState = RCC_PLL_NONE;
+  RCC_OscInitStruct.PLL3.PLLState = RCC_PLL_ON;
+  RCC_OscInitStruct.PLL3.PLLSource = RCC_PLLSOURCE_HSE;
+  RCC_OscInitStruct.PLL3.PLLM = 2;
+  RCC_OscInitStruct.PLL3.PLLN = 50;
+  RCC_OscInitStruct.PLL3.PLLP = 2;
+  RCC_OscInitStruct.PLL3.PLLQ = 2;
+  RCC_OscInitStruct.PLL3.PLLR = 24;
+  RCC_OscInitStruct.PLL3.PLLS = 2;
+  RCC_OscInitStruct.PLL3.PLLT = 2;
+  RCC_OscInitStruct.PLL3.PLLFractional = 0;
+
   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
   {
     Error_Handler();
@@ -254,9 +264,6 @@ static void MPU_Config(void)
   MPU_InitStruct.Number = MPU_REGION_NUMBER3;
   MPU_InitStruct.BaseAddress = 0x24040000;
   MPU_InitStruct.Size = MPU_REGION_SIZE_128KB;
-  MPU_InitStruct.DisableExec = MPU_INSTRUCTION_ACCESS_ENABLE;
-  MPU_InitStruct.IsCacheable = MPU_ACCESS_NOT_CACHEABLE;
-  MPU_InitStruct.IsBufferable = MPU_ACCESS_NOT_BUFFERABLE;
 
   HAL_MPU_ConfigRegion(&MPU_InitStruct);
 
@@ -265,9 +272,6 @@ static void MPU_Config(void)
   MPU_InitStruct.Number = MPU_REGION_NUMBER4;
   MPU_InitStruct.BaseAddress = 0x24060000;
   MPU_InitStruct.Size = MPU_REGION_SIZE_64KB;
-  MPU_InitStruct.DisableExec = MPU_INSTRUCTION_ACCESS_DISABLE;
-  MPU_InitStruct.IsCacheable = MPU_ACCESS_CACHEABLE;
-  MPU_InitStruct.IsBufferable = MPU_ACCESS_BUFFERABLE;
 
   HAL_MPU_ConfigRegion(&MPU_InitStruct);
 
@@ -299,9 +303,6 @@ static void MPU_Config(void)
   */
   MPU_InitStruct.Number = MPU_REGION_NUMBER8;
   MPU_InitStruct.BaseAddress = 0x24071C00;
-  MPU_InitStruct.AccessPermission = MPU_REGION_NO_ACCESS;
-  MPU_InitStruct.IsCacheable = MPU_ACCESS_NOT_CACHEABLE;
-  MPU_InitStruct.IsBufferable = MPU_ACCESS_NOT_BUFFERABLE;
 
   HAL_MPU_ConfigRegion(&MPU_InitStruct);
   /* Enables the MPU */

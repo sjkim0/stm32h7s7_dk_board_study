@@ -18,11 +18,17 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "crc.h"
+#include "dma2d.h"
+#include "gpu2d.h"
+#include "jpeg.h"
+#include "ltdc.h"
 #include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
+#include "ap.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -56,8 +62,7 @@ static uint32_t millis(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 
-__attribute__((section("noncacheable_buffer")))
-uint32_t buffer[DEF_BUFF_ROW_LENGTH][DEF_BUFF_COLUMN_LENGTH] = {0, };
+__attribute__((section("noncacheable_buffer"))) uint32_t buffer[DEF_BUFF_ROW_LENGTH][DEF_BUFF_COLUMN_LENGTH] = {0, };
 
 /* USER CODE END 0 */
 
@@ -90,7 +95,14 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+//  MX_CRC_Init();
+//  MX_LTDC_Init();
+//  MX_DMA2D_Init();
+//  MX_GPU2D_Init();
+//  MX_JPEG_Init();
   /* USER CODE BEGIN 2 */
+
+  apInit();
 
   /* USER CODE END 2 */
 
@@ -101,6 +113,7 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+	  apLoop();
 	  for(int i = 0; i < DEF_BUFF_COLUMN_LENGTH; i++)
 	  {
 		  for(int j = 0; j < DEF_BUFF_ROW_LENGTH; j++)
