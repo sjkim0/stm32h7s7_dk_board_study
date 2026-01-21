@@ -1,0 +1,1 @@
+https://github.com/ST-TOMAS-Examples-ExtMem/stm32h7rs_ospi/blob/main/description/1_extmem_intro.md
