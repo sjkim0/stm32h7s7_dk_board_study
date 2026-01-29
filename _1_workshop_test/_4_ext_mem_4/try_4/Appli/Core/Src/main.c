@@ -42,7 +42,7 @@
 #define DEF_BUFF_COLUMN_LENGTH (32)
 #define DEF_BUFF_ROW_LENGTH (8)
 
-#define DEF_PSRAM_BUFFER_0 (1024)
+#define DEF_PSRAM_BUFFER_0 (1024 * 1024 * 8)
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -64,12 +64,6 @@ static uint32_t millis(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-
-__attribute__((section("noncacheable_buffer")))
-uint32_t buffer[DEF_BUFF_ROW_LENGTH][DEF_BUFF_COLUMN_LENGTH] = {0, };
-
-__attribute__((section("psram_buffer")))
-uint32_t buff_psram[DEF_PSRAM_BUFFER_0] = {0, };
 
 /* USER CODE END 0 */
 
@@ -130,20 +124,7 @@ int main(void)
 
     /* USER CODE BEGIN 3 */
 	  apLoop();
-	  for(int i = 0; i < DEF_BUFF_ROW_LENGTH; i++)
-	  {
-		  for(int j = 0; j < DEF_BUFF_COLUMN_LENGTH; j++)
-		  {
-			  buffer[i][j] = i * j;
-		  }
-	  }
-
-	  HAL_GPIO_WritePin(GPIOM, GPIO_PIN_2 | GPIO_PIN_3, GPIO_PIN_RESET);
-	  HAL_GPIO_WritePin(GPIOO, GPIO_PIN_1 | GPIO_PIN_5, GPIO_PIN_RESET);
-	  HAL_Delay(1000);
-	  HAL_GPIO_WritePin(GPIOM, GPIO_PIN_2 | GPIO_PIN_3, GPIO_PIN_SET);
-	  HAL_GPIO_WritePin(GPIOO, GPIO_PIN_1 | GPIO_PIN_5, GPIO_PIN_SET);
-	  HAL_Delay(1000);
+	  HAL_Delay(1);
   }
   /* USER CODE END 3 */
 }

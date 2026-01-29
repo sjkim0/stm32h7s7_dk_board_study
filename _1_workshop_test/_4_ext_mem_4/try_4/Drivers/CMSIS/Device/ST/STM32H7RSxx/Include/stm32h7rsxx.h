@@ -94,7 +94,6 @@
 /** @addtogroup Device_Included
   * @{
   */
-
 #if defined(STM32H7R3xx)
   #include "stm32h7r3xx.h"
 #elif defined(STM32H7R7xx)

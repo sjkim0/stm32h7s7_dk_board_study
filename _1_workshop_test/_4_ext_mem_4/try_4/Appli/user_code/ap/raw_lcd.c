@@ -24,6 +24,7 @@ static void _lcdOn(void);
 void rawLcdInit(void)
 {
 	_lcdOn();
+//	__HAL_LTDC_LAYER_ENABLE(hltdc, 0);
 }
 
 void rawLcdLoop(void)
