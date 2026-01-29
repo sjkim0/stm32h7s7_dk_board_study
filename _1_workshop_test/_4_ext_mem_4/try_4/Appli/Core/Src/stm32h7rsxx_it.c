@@ -55,7 +55,7 @@
 /* USER CODE END 0 */
 
 /* External variables --------------------------------------------------------*/
-extern GPU2D_HandleTypeDef hgpu2d;
+
 /* USER CODE BEGIN EV */
 
 /* USER CODE END EV */
@@ -197,34 +197,6 @@ void SysTick_Handler(void)
 /* For the available peripheral interrupt handler names,                      */
 /* please refer to the startup file (startup_stm32h7rsxx.s).                    */
 /******************************************************************************/
-
-/**
-  * @brief This function handles GPU2D global interrupt.
-  */
-void GPU2D_IRQHandler(void)
-{
-  /* USER CODE BEGIN GPU2D_IRQn 0 */
-
-  /* USER CODE END GPU2D_IRQn 0 */
-  HAL_GPU2D_IRQHandler(&hgpu2d);
-  /* USER CODE BEGIN GPU2D_IRQn 1 */
-
-  /* USER CODE END GPU2D_IRQn 1 */
-}
-
-/**
-  * @brief This function handles GPU2D Error interrupt.
-  */
-void GPU2D_ER_IRQHandler(void)
-{
-  /* USER CODE BEGIN GPU2D_ER_IRQn 0 */
-
-  /* USER CODE END GPU2D_ER_IRQn 0 */
-  HAL_GPU2D_ER_IRQHandler(&hgpu2d);
-  /* USER CODE BEGIN GPU2D_ER_IRQn 1 */
-
-  /* USER CODE END GPU2D_ER_IRQn 1 */
-}
 
 /* USER CODE BEGIN 1 */
 

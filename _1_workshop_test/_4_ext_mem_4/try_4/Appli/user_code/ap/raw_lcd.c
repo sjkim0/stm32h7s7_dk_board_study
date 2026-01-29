@@ -9,6 +9,12 @@
 #include "raw_lcd.h"
 
 
+#define DEF_LCD_ROW_LENGTH    (480U)
+#define DEF_LCD_COLUMN_LENGTH (800U)
+
+__attribute__((section("psram_buffer")))
+uint32_t lcd_buffer[DEF_LCD_ROW_LENGTH * DEF_LCD_COLUMN_LENGTH];
+
 typedef struct
 {
 

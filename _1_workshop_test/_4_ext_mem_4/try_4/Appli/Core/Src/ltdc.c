@@ -48,11 +48,11 @@ void MX_LTDC_Init(void)
   hltdc.Init.HorizontalSync = 4;
   hltdc.Init.VerticalSync = 4;
   hltdc.Init.AccumulatedHBP = 12;
-  hltdc.Init.AccumulatedVBP = 12;
+  hltdc.Init.AccumulatedVBP = 10;
   hltdc.Init.AccumulatedActiveW = 812;
-  hltdc.Init.AccumulatedActiveH = 492;
+  hltdc.Init.AccumulatedActiveH = 490;
   hltdc.Init.TotalWidth = 820;
-  hltdc.Init.TotalHeigh = 506;
+  hltdc.Init.TotalHeigh = 504;
   hltdc.Init.Backcolor.Blue = 0;
   hltdc.Init.Backcolor.Green = 0;
   hltdc.Init.Backcolor.Red = 0;
@@ -69,9 +69,9 @@ void MX_LTDC_Init(void)
   pLayerCfg.Alpha0 = 0;
   pLayerCfg.BlendingFactor1 = LTDC_BLENDING_FACTOR1_CA;
   pLayerCfg.BlendingFactor2 = LTDC_BLENDING_FACTOR2_CA;
-  pLayerCfg.FBStartAdress = 0x90000000;
-  pLayerCfg.ImageWidth = 800;
-  pLayerCfg.ImageHeight = 480;
+  pLayerCfg.FBStartAdress = 0;
+  pLayerCfg.ImageWidth = 0;
+  pLayerCfg.ImageHeight = 0;
   pLayerCfg.Backcolor.Blue = 0;
   pLayerCfg.Backcolor.Green = 0;
   pLayerCfg.Backcolor.Red = 0;
@@ -88,9 +88,9 @@ void MX_LTDC_Init(void)
   pLayerCfg1.Alpha0 = 0;
   pLayerCfg1.BlendingFactor1 = LTDC_BLENDING_FACTOR1_CA;
   pLayerCfg1.BlendingFactor2 = LTDC_BLENDING_FACTOR2_CA;
-  pLayerCfg1.FBStartAdress = 0x90200000;
-  pLayerCfg1.ImageWidth = 800;
-  pLayerCfg1.ImageHeight = 480;
+  pLayerCfg1.FBStartAdress = 0;
+  pLayerCfg1.ImageWidth = 0;
+  pLayerCfg1.ImageHeight = 0;
   pLayerCfg1.Backcolor.Blue = 0;
   pLayerCfg1.Backcolor.Green = 0;
   pLayerCfg1.Backcolor.Red = 0;
@@ -127,50 +127,33 @@ void HAL_LTDC_MspInit(LTDC_HandleTypeDef* ltdcHandle)
     /* LTDC clock enable */
     __HAL_RCC_LTDC_CLK_ENABLE();
 
-    __HAL_RCC_GPIOF_CLK_ENABLE();
     __HAL_RCC_GPIOG_CLK_ENABLE();
     __HAL_RCC_GPIOB_CLK_ENABLE();
     __HAL_RCC_GPIOE_CLK_ENABLE();
     __HAL_RCC_GPIOA_CLK_ENABLE();
     /**LTDC GPIO Configuration
-    PF0     ------> LTDC_R2
     PG0     ------> LTDC_R7
     PB3(JTDO/TRACESWO)     ------> LTDC_R4
     PG2     ------> LTDC_HSYNC
     PE11     ------> LTDC_VSYNC
-    PA12     ------> LTDC_B2
     PA11     ------> LTDC_B3
     PB4(NJTRST)     ------> LTDC_R3
     PA9     ------> LTDC_B5
     PG1     ------> LTDC_R6
     PA10     ------> LTDC_B4
-    PG14     ------> LTDC_B1
     PA8     ------> LTDC_B6
     PG13     ------> LTDC_CLK
     PA15(JTDI)     ------> LTDC_R5
-    PF7     ------> LTDC_G0
-    PF9     ------> LTDC_R0
-    PF10     ------> LTDC_R1
     PB12     ------> LTDC_G5
     PA0     ------> LTDC_G3
     PA1     ------> LTDC_G2
-    PF11     ------> LTDC_B0
     PB14     ------> LTDC_DE
     PB15     ------> LTDC_G7
-    PF15     ------> LTDC_G1
     PB11     ------> LTDC_G6
     PB13     ------> LTDC_G4
     PA6     ------> LTDC_B7
     */
-    GPIO_InitStruct.Pin = GPIO_PIN_0;
-    GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
-    GPIO_InitStruct.Pull = GPIO_NOPULL;
-    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-    GPIO_InitStruct.Alternate = GPIO_AF11_LTDC;
-    HAL_GPIO_Init(GPIOF, &GPIO_InitStruct);
-
-    GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_2|GPIO_PIN_1|GPIO_PIN_14
-                          |GPIO_PIN_13;
+    GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_2|GPIO_PIN_1|GPIO_PIN_13;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
@@ -192,8 +175,8 @@ void HAL_LTDC_MspInit(LTDC_HandleTypeDef* ltdcHandle)
     GPIO_InitStruct.Alternate = GPIO_AF11_LTDC;
     HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
 
-    GPIO_InitStruct.Pin = GPIO_PIN_12|GPIO_PIN_11|GPIO_PIN_8|GPIO_PIN_15
-                          |GPIO_PIN_0|GPIO_PIN_1;
+    GPIO_InitStruct.Pin = GPIO_PIN_11|GPIO_PIN_8|GPIO_PIN_15|GPIO_PIN_0
+                          |GPIO_PIN_1;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
@@ -206,20 +189,6 @@ void HAL_LTDC_MspInit(LTDC_HandleTypeDef* ltdcHandle)
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
     GPIO_InitStruct.Alternate = GPIO_AF14_LTDC;
     HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
-
-    GPIO_InitStruct.Pin = GPIO_PIN_7|GPIO_PIN_9|GPIO_PIN_15;
-    GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
-    GPIO_InitStruct.Pull = GPIO_NOPULL;
-    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-    GPIO_InitStruct.Alternate = GPIO_AF13_LTDC;
-    HAL_GPIO_Init(GPIOF, &GPIO_InitStruct);
-
-    GPIO_InitStruct.Pin = GPIO_PIN_10|GPIO_PIN_11;
-    GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
-    GPIO_InitStruct.Pull = GPIO_NOPULL;
-    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-    GPIO_InitStruct.Alternate = GPIO_AF14_LTDC;
-    HAL_GPIO_Init(GPIOF, &GPIO_InitStruct);
 
     GPIO_InitStruct.Pin = GPIO_PIN_15|GPIO_PIN_13;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
@@ -253,49 +222,36 @@ void HAL_LTDC_MspDeInit(LTDC_HandleTypeDef* ltdcHandle)
     __HAL_RCC_LTDC_CLK_DISABLE();
 
     /**LTDC GPIO Configuration
-    PF0     ------> LTDC_R2
     PG0     ------> LTDC_R7
     PB3(JTDO/TRACESWO)     ------> LTDC_R4
     PG2     ------> LTDC_HSYNC
     PE11     ------> LTDC_VSYNC
-    PA12     ------> LTDC_B2
     PA11     ------> LTDC_B3
     PB4(NJTRST)     ------> LTDC_R3
     PA9     ------> LTDC_B5
     PG1     ------> LTDC_R6
     PA10     ------> LTDC_B4
-    PG14     ------> LTDC_B1
     PA8     ------> LTDC_B6
     PG13     ------> LTDC_CLK
     PA15(JTDI)     ------> LTDC_R5
-    PF7     ------> LTDC_G0
-    PF9     ------> LTDC_R0
-    PF10     ------> LTDC_R1
     PB12     ------> LTDC_G5
     PA0     ------> LTDC_G3
     PA1     ------> LTDC_G2
-    PF11     ------> LTDC_B0
     PB14     ------> LTDC_DE
     PB15     ------> LTDC_G7
-    PF15     ------> LTDC_G1
     PB11     ------> LTDC_G6
     PB13     ------> LTDC_G4
     PA6     ------> LTDC_B7
     */
-    HAL_GPIO_DeInit(GPIOF, GPIO_PIN_0|GPIO_PIN_7|GPIO_PIN_9|GPIO_PIN_10
-                          |GPIO_PIN_11|GPIO_PIN_15);
-
-    HAL_GPIO_DeInit(GPIOG, GPIO_PIN_0|GPIO_PIN_2|GPIO_PIN_1|GPIO_PIN_14
-                          |GPIO_PIN_13);
+    HAL_GPIO_DeInit(GPIOG, GPIO_PIN_0|GPIO_PIN_2|GPIO_PIN_1|GPIO_PIN_13);
 
     HAL_GPIO_DeInit(GPIOB, GPIO_PIN_3|GPIO_PIN_4|GPIO_PIN_12|GPIO_PIN_14
                           |GPIO_PIN_15|GPIO_PIN_11|GPIO_PIN_13);
 
     HAL_GPIO_DeInit(GPIOE, GPIO_PIN_11);
 
-    HAL_GPIO_DeInit(GPIOA, GPIO_PIN_12|GPIO_PIN_11|GPIO_PIN_9|GPIO_PIN_10
-                          |GPIO_PIN_8|GPIO_PIN_15|GPIO_PIN_0|GPIO_PIN_1
-                          |GPIO_PIN_6);
+    HAL_GPIO_DeInit(GPIOA, GPIO_PIN_11|GPIO_PIN_9|GPIO_PIN_10|GPIO_PIN_8
+                          |GPIO_PIN_15|GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_6);
 
   /* USER CODE BEGIN LTDC_MspDeInit 1 */
 

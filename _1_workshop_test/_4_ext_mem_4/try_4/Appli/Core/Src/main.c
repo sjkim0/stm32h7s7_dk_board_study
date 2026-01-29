@@ -18,11 +18,7 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-#include "crc.h"
-#include "dma2d.h"
-#include "gpu2d.h"
 #include "icache.h"
-#include "jpeg.h"
 #include "ltdc.h"
 #include "gpio.h"
 
@@ -104,11 +100,7 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
-  MX_CRC_Init();
   MX_LTDC_Init();
-  MX_DMA2D_Init();
-  MX_GPU2D_Init();
-  MX_JPEG_Init();
   MX_ICACHE_GPU2D_Init();
   /* USER CODE BEGIN 2 */
 
@@ -123,6 +115,7 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+
 	  apLoop();
 	  HAL_Delay(1);
   }
