@@ -10,10 +10,10 @@
 
 
 #include "stm32h7rsxx_hal.h"
-#include "crc.h"
-#include "dma2d.h"
-#include "gpu2d.h"
-#include "jpeg.h"
+//#include "crc.h"
+//#include "dma2d.h"
+//#include "gpu2d.h"
+//#include "jpeg.h"
 #include "ltdc.h"
 #include "gpio.h"
 
