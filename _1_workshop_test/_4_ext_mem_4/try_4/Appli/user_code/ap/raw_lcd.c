@@ -30,7 +30,7 @@ static void _lcdOn(void);
 void rawLcdInit(void)
 {
 	_lcdOn();
-//	__HAL_LTDC_LAYER_ENABLE(hltdc, 0);
+	__HAL_LTDC_LAYER_ENABLE(&hltdc, 0);
 
 	int test_count = 0;
 	for(int i = 0; i < DEF_LCD_ROW_LENGTH * DEF_LCD_COLUMN_LENGTH; i++)
