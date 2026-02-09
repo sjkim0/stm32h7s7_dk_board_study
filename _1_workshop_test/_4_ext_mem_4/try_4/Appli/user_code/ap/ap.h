@@ -14,6 +14,7 @@ extern "C" {
 #endif
 
 
+#include "hw.h"
 #include "ap_def.h"
 
 

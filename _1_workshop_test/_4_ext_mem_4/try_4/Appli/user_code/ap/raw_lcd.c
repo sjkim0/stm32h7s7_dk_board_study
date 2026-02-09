@@ -47,6 +47,6 @@ void rawLcdLoop(void)
 
 static void _lcdOn(void)
 {
-	HAL_GPIO_WriteMultipleStatePin(GPIOG, GPIO_PIN_15, GPIO_PIN_SET);
-	HAL_GPIO_WriteMultipleStatePin(GPIOE, GPIO_PIN_15, GPIO_PIN_SET);
+	HAL_GPIO_WritePin(GPIOG, GPIO_PIN_15, GPIO_PIN_SET);
+	HAL_GPIO_WritePin(GPIOE, GPIO_PIN_15, GPIO_PIN_SET);
 }
